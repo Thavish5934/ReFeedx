@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  /* Visible keyboard focus everywhere - quality floor, not optional. */
+  :focus-visible {
+    outline: 2px solid #E8A33D;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+   * The "stamp" - ReFeedX's signature element. Every status badge in the
+   * product (and the landing page's hero tags) uses this: an inked,
+   * slightly-imperfect rubber-stamp look instead of a generic pill badge,
+   * because the platform's whole job is literally stamping food AVAILABLE,
+   * RESERVED, COMPLETED as it moves from donor to requester.
+   */
+  .stamp {
+    @apply inline-flex items-center gap-1.5 font-stamp text-[11px] font-semibold uppercase tracking-widest
+           px-3 py-1.5 rounded-sm border-2 shadow-stamp select-none;
+    background-color: rgba(251, 246, 236, 0.9);
+  }
+
+  .stamp::before {
+    content: "";
+    @apply w-1.5 h-1.5 rounded-full;
+    background-color: currentColor;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 font-body font-semibold
+           text-sm transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-leaf text-paper hover:bg-leaf-dark;
+  }
+
+  .btn-secondary {
+    @apply btn bg-marigold text-forest-900 hover:bg-marigold-dark;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-forest text-forest hover:bg-forest hover:text-paper;
+  }
+
+  .card {
+    @apply bg-paper rounded-xl shadow-card border border-forest-100 p-6;
+  }
+
+  .input {
+    @apply w-full rounded-md border border-forest-100 bg-white px-3.5 py-2.5 text-sm text-ink
+           placeholder:text-ink/40 focus:border-leaf focus:ring-1 focus:ring-leaf outline-none transition;
+  }
+
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wide text-forest-600 mb-1.5;
+  }
+}
